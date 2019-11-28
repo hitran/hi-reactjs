@@ -15,7 +15,3 @@ function App() {
 }
 
 export default App;
-// https://www.ninjavan.co/vi-vn/tracking
-// thanh nien
-// https://tinhte.vn/
-// https://www.airbnb.com.vn/
