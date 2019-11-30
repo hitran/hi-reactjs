@@ -4,7 +4,6 @@ import ProductInfo from './ProductInfo';
 import ProductImage from './ProductImage';
 import './App.css';
 
-
 function App() {
   const product =
   {
