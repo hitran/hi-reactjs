@@ -4,7 +4,8 @@ import Footer from './components/Footer/Footer';
 import ProductList from './components/ProductList/ProductList';
 import SideBar from './components/SideBar/SideBar';
 import Layout from './components/Layout/Layout';
-import dataJson from './data.json';
+import dataJson from './phone.json';
+import './Main.css';
 
 function Main() {
     return (
