@@ -19,6 +19,8 @@ function ProductList(props) {
                         {
                             props.data.map(elm => {
                                 return <ProductItem 
+                                key = {elm.product_id}
+                                onProductClicked = {props.onProductClicked}
                                 // img_url={elm.img_url} 
                                 // shop_name={elm.shop_name} 
                                 // name={elm.name} 

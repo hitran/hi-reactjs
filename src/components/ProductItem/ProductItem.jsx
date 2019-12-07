@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 
-function ProductItem({img_url, shop_name, name, final_price, price}) {
+function ProductItem({onProductClicked, img_url, shop_name, name, final_price, price}) {
+    const getProductName = () => {
+        onProductClicked({img_url, name, final_price, price});
+    }
     return (
         <div className="col-xl-4 col-lg-6 col-md-6">
             <div className="product-wrapper mb-50">
@@ -10,7 +13,7 @@ function ProductItem({img_url, shop_name, name, final_price, price}) {
                         <img src={img_url} alt="" />
                     </a>
                     <div className="product-action text-center">
-                        <a href="#" title="Shoppingb Cart">
+                        <a onClick={getProductName} title="Shoppingb Cart">
                             <i className="fas fa-shopping-cart" />
                         </a>
                         <a href="#" title="Quick View">
@@ -27,8 +30,8 @@ function ProductItem({img_url, shop_name, name, final_price, price}) {
                     </h4>
                     <div className="product-meta">
                         <div className="pro-price">
-                            <span>{final_price}</span>
-                            <span className="old-price">{price}</span>
+                            <span>{final_price.toLocaleString()} VND</span>
+                            <span className="old-price">{price.toLocaleString()} VND</span>
                         </div>
                     </div>
                 </div>
