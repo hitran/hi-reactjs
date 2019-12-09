@@ -8,6 +8,7 @@ export default function Cart(props) {
                     <a href="#">
                         <img src={product.img_url} alt="" />
                     </a>
+                    <span><b> x {product.qty}</b></span>
                 </div>
                 <div className="cart-content">
                     <h3>

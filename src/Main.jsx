@@ -10,15 +10,24 @@ import dataJson from './phone.json';
 function Main() {
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+    const [totalProducts, setTotalProducts] = useState(0);
     
     const getSelectedProduct = (product) => {
-       setSelectedProducts([...selectedProducts, product]);
+        const i = selectedProducts.findIndex(elm => elm.product_id === product.product_id);
+        if (i > -1) {
+            const newSelectedProducts = [...selectedProducts];
+            newSelectedProducts[i]['qty'] += 1;
+            setSelectedProducts(newSelectedProducts);
+        } else {
+            setSelectedProducts([...selectedProducts, product]);
+        }
        setTotalPrice(totalPrice + product.final_price);
+       setTotalProducts(totalProducts+1);
     }
    
     return (
         <>
-            <Header totalItems={selectedProducts.length}>
+            <Header totalItems={totalProducts}>
                 <Cart selectedProducts={selectedProducts} totalPrice={totalPrice}/>
             </Header>
             <Layout>

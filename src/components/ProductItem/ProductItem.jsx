@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
 
-function ProductItem({onProductClicked, img_url, shop_name, name, final_price, price}) {
+function ProductItem({onProductClicked, img_url, shop_name, name, final_price, price, product_id}) {
     const getProductName = () => {
-        onProductClicked({img_url, name, final_price, price});
+        onProductClicked({img_url, name, final_price, price, product_id, qty: 1});
     }
     return (
         <div className="col-xl-4 col-lg-6 col-md-6">
