@@ -47,6 +47,10 @@ function Main() {
                 }
                 return 0;
             }))
+        } else if (sortType === 'low to high') {
+            setProductList(products.sort((a, b) => a.final_price - b.final_price));
+        } else if (sortType === 'high to low') {
+            setProductList(products.sort((a, b) => b.final_price - a.final_price));
         }
     }
     return (
