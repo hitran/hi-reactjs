@@ -32,7 +32,7 @@ export default function Cart(props) {
 
     return (
         <ul className="minicart">
-            {selectedProduct}
+            {props.selectedProducts.length > 0 ? selectedProduct : <p>Your Shopping Cart Is Empty!</p>}
             <li>
                 <div className="total-price">
                     <span className="f-left">Total: {props.totalPrice.toLocaleString()} VND</span>

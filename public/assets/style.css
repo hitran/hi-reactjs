@@ -589,6 +589,9 @@ label {
 .header-right ul li .minicart .cart-img {
     float: left;
 }
+.header-right ul li .minicart .cart-img span {
+	padding-left: 20px;
+}
 .header-right ul li .minicart .cart-content {
   float: left;
   padding-left: 15px;
@@ -1273,17 +1276,18 @@ img.secondary-img {
 	padding-right: 50px;
 }
 .pro-cat a {
-	font-size: 14px;
+	font-size: 13px;
 	color: #fe4536;
 	text-transform: uppercase;
-	letter-spacing: 2px;
+	/* letter-spacing: 2px; */
 }
 .pro-cat a:hover {
 	color: #84b77c;
 }
 .product-content h4 {
-	font-size: 20px;
-	margin-bottom: 15px;
+	font-size: 17px;
+	line-height: 23px;
+	/* margin-bottom: 15px; */
 }
 .product-content h4 a:hover {
 	color: #fe4536;

@@ -28,7 +28,7 @@ function Main() {
 
     const onSortClicked = (sortType) => {
         // create a new copy of products and modify it
-        const products = [...productList];
+        const products = [...dataJson.data];
         if (sortType === 'z to a') {
             setProductList(products.sort((a, b) => {
                 if (a.name > b.name) {
@@ -53,6 +53,11 @@ function Main() {
             setProductList(products.sort((a, b) => b.final_price - a.final_price));
         }
     }
+
+    const onFilterClicked = () => {
+        const products = [...productList];
+        setProductList(products.filter(product => product.final_promotion_percent >= 10))
+    }
     return (
         <>
             <Header totalItems={totalProducts}>
@@ -60,7 +65,7 @@ function Main() {
             </Header>
             <Layout>
                 <ProductList data={productList} onProductClicked={getSelectedProduct} />
-                <SideBar onSortData={onSortClicked} />
+                <SideBar onSortData={onSortClicked} onFilterData={onFilterClicked} />
             </Layout>
             <Footer />
         </>
