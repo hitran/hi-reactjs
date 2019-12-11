@@ -1,6 +1,9 @@
 import React from 'react';
 
-function SideBar() {
+function SideBar({onSortData}) {
+    const handleSortClick = (sortType) => {
+        onSortData(sortType);
+    }
     return (
         <div className="col-xl-3 col-lg-4">
             <div className="sidebar-shop">
@@ -22,8 +25,8 @@ function SideBar() {
                 <div className="shop-widget">
                     <h3 className="shop-title">SHOP BY</h3>
                     <ul className="shop-link">
-                        <li><a href="#">Name: A-Z</a></li>
-                        <li><a href="#">Name: Z-A</a></li>
+                        <li><a onClick={() => handleSortClick('a to z')} href="#">Name: A-Z</a></li>
+                        <li><a onClick={() => handleSortClick('z to a')} href="#">Name: Z-A</a></li>
                         <li><a href="#">Price: High to Low</a></li>
                         <li><a href="#">Price: Low to High</a></li>
                         <li><a href="#">Product: Top Sales</a></li>
