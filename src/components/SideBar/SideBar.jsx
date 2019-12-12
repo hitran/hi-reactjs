@@ -1,6 +1,7 @@
 import React from 'react';
+import Search from '../Search/Search';
 
-function SideBar({onSortData, onFilterData}) {
+function SideBar({ onSortData, onFilterData, onSearchData }) {
     const handleSortClick = (sortType) => {
         onSortData(sortType);
     }
@@ -13,10 +14,7 @@ function SideBar({onSortData, onFilterData}) {
             <div className="sidebar-shop">
                 <div className="shop-widget">
                     <h3 className="shop-title">Search by</h3>
-                    <form action="#" className="shop-search">
-                        <input type="text" placeholder="Your keyword...." />
-                        <button><i className="fa fa-search" /></button>
-                    </form>
+                    <Search searchData={onSearchData}/>
                 </div>
                 {/* 
                             <div class="shop-widget">
