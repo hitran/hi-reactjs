@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import {ThemeContext} from '../ThemeContext/ThemeContext';
 import firebase from 'firebase';
 
 
-export default function Login() {
+export default function Login({ loggedIn }) {
+  const context = useContext(ThemeContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const onEmailChange = (e) => {
     setEmail(e.target.value);
@@ -16,19 +19,27 @@ export default function Login() {
 
   const onLogin = async (e) => {
     e.preventDefault();
-    console.log({ email: email, password: password });
     try {
-      const result = await firebase.auth().signInWithEmailAndPassword(email, password)
-      console.log(result);
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      window.location.href="/";
+      setErrorMsg('');
     } catch (error) {
-      console.log(error)
+      setErrorMsg(error.message)
     }
   }
+  console.log(context);
 
+  const switchTheme = () => {
+    console.log(context);
+    context.switchTheme();
+  }
+
+  
+  
   return (
-    <main>
+    <main style={{backgroundColor: `${context.theme}` }}>
       {/* breadcrumb-area-start */}
-      <section className="breadcrumb-area" style={{ backgroundImage: 'url("./assets/page-title.png")' }}>
+      <section className="breadcrumb-area" style={{ backgroundImage: 'url("./assets/page-title.png")'}}>
         <div className="container">
           <div className="row">
             <div className="col-xl-12">
@@ -37,6 +48,7 @@ export default function Login() {
                 <ul className="breadcrumb-menu">
                   <li><a href="index.html">home</a></li>
                   <li><span>Login</span></li>
+                  <button onClick={switchTheme}>Change theme</button>
                 </ul>
               </div>
             </div>
@@ -51,6 +63,7 @@ export default function Login() {
             <div className="col-lg-8 offset-lg-2">
               <div className="basic-login">
                 <h3 className="text-center mb-60">Login From Here</h3>
+                <p className="text-danger">{errorMsg}</p>
                 <form onSubmit={onLogin}>
                   <label htmlFor="name">Email Address <span>**</span></label>
                   <input onChange={onEmailChange} value={email} id="name" type="text" placeholder="Enter Username or Email address..." />

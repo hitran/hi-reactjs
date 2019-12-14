@@ -67,7 +67,6 @@ function Main() {
         console.log(searchQuery);
     }
 
-
     return (
         <>
             <Header totalItems={totalProducts}>

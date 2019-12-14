@@ -1,6 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
+import firebase from 'firebase'
 
 function Header(props) {
+    const [userInfo, setUserInfo] = useState({});
+
+    // listen to changes in authentication state
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          console.log(user);
+          setUserInfo(user);
+        }
+    });
+
+    // log out
+    const onLogOut = async () => {
+        await firebase.auth().signOut();
+        window.location.href = "/";
+    }
     return (
         <header>
             <div id="header-sticky" className="header-area box-90 sticky-header">
@@ -55,10 +71,15 @@ function Header(props) {
                         <div className="col-xl-2 col-lg-6 col-md-6 col-5 col-sm-7 pl-0">
                             <div className="header-right f-right">
                                 <ul>
+                                    
                                     <li className="search-btn">
                                         <a className="search-btn nav-search search-trigger" href="#"><i className="fas fa-search"></i></a>
                                     </li>
-                                    <li className="login-btn"><a href="#"><i className="far fa-user"></i></a></li>
+                                    {
+                                        userInfo && userInfo.email
+                                        ? <li onClick={onLogOut} className="login-btn"><a href="#"><i className="fas fa-sign-out-alt"></i></a></li>
+                                        : <li className="login-btn"><a href="#"><i className="far fa-user"></i></a></li>
+                                    }
                                     <li className="d-shop-cart"><a href="#"><i className="fas fa-shopping-cart"></i>
                                         <span className="cart-count">
                                             {props.totalItems}
