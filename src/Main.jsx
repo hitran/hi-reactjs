@@ -77,8 +77,8 @@ function Main() {
                 {/* <ProductList data={productList} onProductClicked={getSelectedProduct} />
                 <SideBar onSortData={onSortClicked} onFilterData={onFilterClicked} onSearchData={onSearchClicked} /> */}
             {/* </Layout> */}
-            <Register/>
-            {/* <Login/> */}
+            {/* <Register/> */}
+            <Login/>
             
             <Footer />
         </>
