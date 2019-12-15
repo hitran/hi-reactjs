@@ -6,6 +6,7 @@ import SideBar from './components/SideBar/SideBar';
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import Layout from './components/Layout/Layout';
+import ProductDetail from './components/ProductDetail/ProductDetail';
 import Cart from './components/Cart/Cart';
 import dataJson from './phone.json';
 
@@ -60,7 +61,7 @@ function Main() {
         const products = [...productList];
         setProductList(products.filter(product => product.final_promotion_percent >= 10))
     }
-    
+
     const onSearchClicked = (searchQuery) => {
         const products = [...dataJson.data];
         setProductList(products.filter(product => product.name.includes(searchQuery)));
@@ -72,13 +73,13 @@ function Main() {
             <Header totalItems={totalProducts}>
                 <Cart selectedProducts={selectedProducts} totalPrice={totalPrice} />
             </Header>
-            {/* <Layout> */}
+            <Layout>
                 {/* <ProductList data={productList} onProductClicked={getSelectedProduct} />
                 <SideBar onSortData={onSortClicked} onFilterData={onFilterClicked} onSearchData={onSearchClicked} /> */}
-            {/* </Layout> */}
-            {/* <Register/> */}
-            <Login/>
-            
+                <ProductDetail />
+            </Layout>
+            {/* <Register />
+            <Login /> */}
             <Footer />
         </>
     )
