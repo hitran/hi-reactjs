@@ -1,24 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Footer() {
+    const [time, setTime] = useState("");
+
+    const getTime = () => {
+        const today = new Date();
+        const hours = today.getHours();
+        const minutes = today.getMinutes();
+        const seconds = today.getSeconds();
+        const time = `${formatTime(hours)} : ${formatTime(minutes)}: ${formatTime(seconds)} ${getSuffix(hours)}`;
+        setTime(time);
+    }
+
+    const getSuffix = (hour) => {
+        if (hour < 12) {
+            return `AM`
+        } else {
+            return `PM`
+        }
+    }
+
+    const formatTime = (time) => {
+        if (time < 10) {
+            return `0${time}`;
+        } else {
+            return `${time}`
+        }
+    };
+
+    useEffect(() => {
+        setInterval(getTime, 1000);
+    }, [time])
     return (
         <footer className="footer-area pl-100 pr-100">
-            <div className="footer-area box-90 pt-100 pb-60" data-background="img/bg/footer.jpg" style={{"background-image" : "url(&quot;img/bg/footer.jpg&quot)"}}>
+            <div className="footer-area box-90 pt-100 pb-60" data-background="img/bg/footer.jpg" style={{ "background-image": "url(&quot;img/bg/footer.jpg&quot)" }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-xl-5 col-lg-6 col-md-6 ">
                             <div className="footer-widget mb-40 pr-70">
                                 <div className="footer-logo">
-                                    <a href="#"><img src="./assets/logo_shop.png" alt=""/></a>
+                                    <a href="#"><img src="./assets/logo_shop.png" alt="" /></a>
                                 </div>
+                                <h3>Current Time: {time}</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
                                     ut labore et dolore mag na
                                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
                                     ex ea commodo consequat.
                                 </p>
+                                
                                 <div className="footer-time d-flex mt-30">
                                     <div className="time-icon">
-                                        <img src="./assets/time.png" alt=""/>
+                                        <img src="./assets/time.png" alt="" />
                                     </div>
                                     <div className="time-text">
                                         <span>Got Questions ? Call us 24/7!</span>
