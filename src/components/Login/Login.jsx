@@ -27,10 +27,8 @@ export default function Login({ loggedIn }) {
       setErrorMsg(error.message)
     }
   }
-  console.log(context);
 
   const switchTheme = () => {
-    console.log(context);
     context.switchTheme();
   }
 

@@ -68,7 +68,6 @@ function Main() {
     const onSearchClicked = (searchQuery) => {
         const products = [...dataJson.data];
         setProductList(products.filter(product => product.name.includes(searchQuery)));
-        console.log(searchQuery);
     }
 
     return (
