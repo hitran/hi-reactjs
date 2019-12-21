@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
+import dataJson from '../../phone.json';
 
-export const ThemeContext = React.createContext("");
+export const DataContext = React.createContext("");
 export default function Context({children}) {
     const [themeValue, setThemeValue] = useState("white");
+    const [products, setProducts] = useState(dataJson.data);
     
     const switchTheme = () => {
         if (themeValue === "white") {
@@ -11,9 +13,13 @@ export default function Context({children}) {
             setThemeValue("white");
         }
     }
+
+    const sendProducts = (products) => {
+        setProducts(products)
+    }
     return (
-        <ThemeContext.Provider value={{theme: themeValue, switchTheme}}>
+        <DataContext.Provider value={{theme: themeValue, switchTheme, products, sendProducts}}>
             {children}
-        </ThemeContext.Provider>
+        </DataContext.Provider>
     )
 }

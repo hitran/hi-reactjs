@@ -1,25 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { DataContext } from '../DataContext/DataContext';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function ProductDetail() {
+    const context = useContext(DataContext);
+    const products = context.products;
+    const param = useParams();
+    const id = parseInt(param.productId);
+    const idx = products.findIndex(product => product.product_id === id)
+    let currentProduct = {}
+    if (idx !== -1) {
+        currentProduct = products[idx];
+    }
+
+    const minus = () => { }
+    const plus = () => { }
+    const addToCart = () => { }
     return (
         <main>
-            {/* breadcrumb-area-start */}
-            <section className="breadcrumb-area" style={{ backgroundImage: 'url("./assets/page-title.png")' }}>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xl-12">
-                            <div className="breadcrumb-text text-center">
-                                <h1>Our Shop</h1>
-                                <ul className="breadcrumb-menu">
-                                    <li><a href="index.html">home</a></li>
-                                    <li><span>shop details</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            {/* breadcrumb-area-end */}
             {/* shop-area start */}
             <section className="shop-details-area pt-100 pb-100">
                 <div className="container">
@@ -29,17 +28,17 @@ export default function ProductDetail() {
                                 <div className="tab-content" id="myTabContentpro">
                                     <div className="tab-pane fade show active" id="home" role="tabpanel">
                                         <div className="product-large-img">
-                                            <img src="img/product/pro1.jpg" alt="" />
+                                            <img src={currentProduct.img_url} alt="" />
                                         </div>
                                     </div>
                                     <div className="tab-pane fade" id="profile" role="tabpanel">
                                         <div className="product-large-img">
-                                            <img src="img/product/pro2.jpg" alt="" />
+                                            <img src={currentProduct.img_url} alt="" />
                                         </div>
                                     </div>
                                     <div className="tab-pane fade" id="profile1" role="tabpanel">
                                         <div className="product-large-img">
-                                            <img src="img/product/pro3.jpg" alt="" />
+                                            <img src={currentProduct.img_url} alt="" />
                                         </div>
                                     </div>
                                 </div>
@@ -64,10 +63,10 @@ export default function ProductDetail() {
                                     <a href="#">decor,</a>
                                     <a href="#">furniture</a>
                                 </div>
-                                <h2 className="pro-details-title mb-15">Limonda Women Winter Cloth</h2>
+                                <h2 className="pro-details-title mb-15">{currentProduct.name}</h2>
                                 <div className="details-price mb-20">
-                                    <span>$119.00</span>
-                                    <span className="old-price">$246.00</span>
+                                    <span>{currentProduct.final_price.toLocaleString()}</span>
+                                    <span className="old-price">{currentProduct.price.toLocaleString()}</span>
                                 </div>
                                 <div className="product-variant">
                                     <div className="product-desc variant-item">
@@ -448,5 +447,6 @@ export default function ProductDetail() {
             </section>
             {/* product-area end */}
         </main>
+
     );
 }

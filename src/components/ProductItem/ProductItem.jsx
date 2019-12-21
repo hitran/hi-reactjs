@@ -1,10 +1,13 @@
-import React, {useState} from 'react';
-
+import React, {useState, useContext} from 'react';
+import {Link} from 'react-router-dom';
+import {DataContext} from '../DataContext/DataContext';
 
 function ProductItem({onProductClicked, img_url, shop_name, name, final_price, price, product_id}) {
     const getProductName = () => {
         onProductClicked({img_url, name, final_price, price, product_id, qty: 1});
     }
+    const context = useContext(DataContext);
+    console.log(context);
     return (
         <div className="col-xl-4 col-lg-6 col-md-6">
             <div className="product-wrapper mb-50">
@@ -16,9 +19,9 @@ function ProductItem({onProductClicked, img_url, shop_name, name, final_price, p
                         <a onClick={getProductName} title="Shoppingb Cart">
                             <i className="fas fa-shopping-cart" />
                         </a>
-                        <a href="#" title="Quick View">
+                        <Link to={`/product/${product_id}`} title="Quick View">
                             <i className="fas fa-search" />
-                        </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="product-content pr-0">

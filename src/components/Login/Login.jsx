@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
-import {ThemeContext} from '../ThemeContext/ThemeContext';
+import {DataContext} from '../DataContext/DataContext';
 import firebase from 'firebase';
 
 
 export default function Login({ loggedIn }) {
-  const context = useContext(ThemeContext);
+  const context = useContext(DataContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');

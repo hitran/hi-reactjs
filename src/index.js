@@ -4,7 +4,7 @@ import './index.css';
 import Main from './Main';
 import * as serviceWorker from './serviceWorker';
 import firebaseInit from './firebase';
-import Context from './components/ThemeContext/ThemeContext';
+import Context from './components/DataContext/DataContext';
 
 firebaseInit();
 ReactDOM.render(

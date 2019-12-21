@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import ProductList from './components/ProductList/ProductList';
-import SideBar from './components/SideBar/SideBar';
-import Register from './components/Register/Register';
-import Login from './components/Login/Login';
-import Layout from './components/Layout/Layout';
-import ProductDetail from './components/ProductDetail/ProductDetail';
 import Cart from './components/Cart/Cart';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import dataJson from './phone.json';
+import Loading from './components/Loading/Loading';
+import Layout from './components/Layout/Layout';
+const ProductList = React.lazy(() => import('./components/ProductList/ProductList'));
+const ProductDetail = React.lazy(() => import('./components/ProductDetail/ProductDetail'));
+const Login = React.lazy(() => import('./components/Login/Login'));
+const Register = React.lazy(() => import('./components/Register/Register'));
+const NotFound = React.lazy(() => import('./components/NotFound/NotFound'));
+const SideBar = React.lazy(() => import('./components/SideBar/SideBar'));
 
 function Main() {
     const [selectedProducts, setSelectedProducts] = useState([]);
@@ -70,17 +73,30 @@ function Main() {
 
     return (
         <>
-            <Header totalItems={totalProducts}>
-                <Cart selectedProducts={selectedProducts} totalPrice={totalPrice} />
-            </Header>
-            <Layout>
-                {/* <ProductList data={productList} onProductClicked={getSelectedProduct} />
-                <SideBar onSortData={onSortClicked} onFilterData={onFilterClicked} onSearchData={onSearchClicked} /> */}
-                <ProductDetail />
-            </Layout>
-            {/* <Register />
-            <Login /> */}
-            <Footer />
+            <Router>
+                <Header totalItems={totalProducts}>
+                    <Cart selectedProducts={selectedProducts} totalPrice={totalPrice} />
+                </Header>
+                <React.Suspense fallback={<Loading />} >
+                    <Switch>
+                        <Route path="/login">
+                            <Login />
+                        </Route>
+                        <Route path="/register">
+                            <Register />
+                        </Route>
+                        <Route path="/" exact>
+                            <Layout>
+                                <ProductList data={productList} onProductClicked={getSelectedProduct} />
+                                <SideBar onSortData={onSortClicked} onFilterData={onFilterClicked} onSearchData={onSearchClicked} />
+                            </Layout>
+                        </Route>
+                        <Route path="/product/:productId"><ProductDetail /></Route>
+                        <Route path="*"><NotFound /></Route>
+                    </Switch>
+                </React.Suspense>
+                <Footer />
+            </Router>
         </>
     )
 }
