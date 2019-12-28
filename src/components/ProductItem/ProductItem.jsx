@@ -7,7 +7,6 @@ function ProductItem({onProductClicked, img_url, shop_name, name, final_price, p
         onProductClicked({img_url, name, final_price, price, product_id, qty: 1});
     }
     const context = useContext(DataContext);
-    console.log(context);
     return (
         <div className="col-xl-4 col-lg-6 col-md-6">
             <div className="product-wrapper mb-50">

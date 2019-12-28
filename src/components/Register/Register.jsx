@@ -1,8 +1,6 @@
 import React, {useState} from 'react';
-import firebase from 'firebase';
 
-
-export default function Register() {
+export default function Register(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
@@ -16,13 +14,9 @@ export default function Register() {
 
     const onRegister = async(e) => {
         e.preventDefault();
-        console.log({email: email, password: password});
-        try {
-            await firebase.auth().createUserWithEmailAndPassword(email, password);
-        } catch (err) {
-            console.log(err);
-        }
+        props.registerAction(email,password);
     }
+
 
     return (
         <main>
@@ -50,12 +44,14 @@ export default function Register() {
                                 <form onSubmit={onRegister}>
                                     {/* <label htmlFor="name">Username <span>**</span></label>
                                     <input id="name" type="text" placeholder="Enter Username or Email address..." /> */}
+                                    <p className="text-danger">{props.error}</p>
                                     <label htmlFor="email-id">Email Address <span>**</span></label>
                                     <input onChange={onEmailChange} value={email} id="email-id" type="text" placeholder="Enter Username or Email address..." />
                                     <label htmlFor="pass">Password <span>**</span></label>
                                     <input onChange={onPasswordChange} value={password} id="pass" type="password" placeholder="Enter password..." />
                                     <div className="mt-10" />
-                                    <button type="submit" className="btn theme-btn-2 w-100">Register Now</button>
+                                    { !props.load ? <button type="submit" className="btn theme-btn-2 w-100">Register Now</button> : "Registering..."}
+                                    
                                     <div className="or-divide"><span>or</span></div>
                                     <button type="button" className="btn theme-btn w-100">login Now</button>
                                 </form>

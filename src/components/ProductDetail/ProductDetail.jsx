@@ -1,22 +1,57 @@
-import React, { useContext } from 'react';
-import { DataContext } from '../DataContext/DataContext';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import NotFound from '../NotFound/NotFound';
 
-export default function ProductDetail() {
-    const context = useContext(DataContext);
-    const products = context.products;
+export default function ProductDetail(props) {
+    const [qty, setQty] = useState(1);
     const param = useParams();
     const id = parseInt(param.productId);
-    const idx = products.findIndex(product => product.product_id === id)
-    let currentProduct = {}
-    if (idx !== -1) {
-        currentProduct = products[idx];
-    }
+    useEffect(() => {
+        props.getProductDetailById(id);
+    },[])
+    let currentProduct = props.data
 
-    const minus = () => { }
-    const plus = () => { }
-    const addToCart = () => { }
+    const minus = () => {
+        // if (data.productsInCart) {
+        //     const i = data.productsInCart.findIndex(elm => elm.product_id === currentProduct.product_id);
+        //     if (i > -1 && data.productsInCart[i]['qty'] > 0) {
+        //         data.productsInCart[i]['qty'] -= 1;
+        //     }
+        //     props.addToCartAction(data);
+        // }
+        // // for display only
+        // if (qty > 0 ) {
+        //     const newQty = qty - 1
+        //     setQty(newQty);
+        // }
+    }
+    const plus = () => {
+        // if (data.productsInCart) {
+        //     const i = data.productsInCart.findIndex(elm => elm.product_id === currentProduct.product_id);
+        //     if (i > -1) {
+        //         data.productsInCart[i]['qty'] += 1;
+        //     }
+        //     props.addToCartAction(data);
+        // }
+        // // for display only
+        // const newQty = qty + 1
+        // setQty(newQty);
+    }
+    const onPurchase = (e) => {
+        // e.preventDefault();
+        // currentProduct['qty'] = qty;
+        // if (!data.productsInCart) {
+        //     data.productsInCart = [currentProduct];
+        // } else {
+        //     data.productsInCart = [...data.productsInCart, currentProduct];
+        // }
+        // props.addToCartAction(data);
+        //history.push("/shopping-cart");
+
+    }
+    if (props.error || !currentProduct) {
+        return <NotFound/>
+    }
     return (
         <main>
             {/* shop-area start */}
@@ -83,13 +118,17 @@ export default function ProductDetail() {
                                     </div>
                                     <div className="product-action-details variant-item">
                                         <div className="product-details-action">
-                                            <form action="#">
+                                            <form>
                                                 <div className="plus-minus">
-                                                    <div className="cart-plus-minus"><input type="text" defaultValue={1} /><div className="dec qtybutton">-</div><div className="inc qtybutton">+</div></div>
+                                                    <div className="cart-plus-minus">
+                                                        <input type="text" value={qty}/>
+                                                        <div className="dec qtybutton" onClick={minus}>-</div>
+                                                        <div className="inc qtybutton" onClick={plus}>+</div>
+                                                    </div>
                                                 </div>
                                                 <button className="details-action-icon" type="submit"><i className="fas fa-heart" /></button>
                                                 <div className="details-cart mt-40">
-                                                    <button className="btn theme-btn">purchase now</button>
+                                                    <button disabled = {qty === 0} type="submit" className="btn theme-btn" onClick={onPurchase}>purchase now</button>
                                                 </div>
                                             </form>
                                         </div>

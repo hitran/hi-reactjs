@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProductItem from '../ProductItem/ProductItem';
 
 function ProductList(props) {
+    useEffect(() => {
+        props.getProductListAction();
+    },[])
     return (
         <div className="col-xl-9 col-lg-8">
             {/* tab filter */}
@@ -16,19 +19,19 @@ function ProductList(props) {
             <div className="tab-content" id="myTabContent">
                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <div className="row">
-                        {
+                        {props.data ?
                             props.data.map(elm => {
-                                return <ProductItem 
-                                key = {elm.product_id}
-                                onProductClicked = {props.onProductClicked}
-                                // img_url={elm.img_url} 
-                                // shop_name={elm.shop_name} 
-                                // name={elm.name} 
-                                // final_price={elm.final_price}
-                                // price={elm.price}
-                                {...elm}
+                                return <ProductItem
+                                    key={elm.product_id}
+                                    onProductClicked={props.onProductClicked}
+                                    // img_url={elm.img_url} 
+                                    // shop_name={elm.shop_name} 
+                                    // name={elm.name} 
+                                    // final_price={elm.final_price}
+                                    // price={elm.price}
+                                    {...elm}
                                 />
-                            })
+                            }): null
                         }
                     </div>
                 </div>

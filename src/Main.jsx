@@ -6,12 +6,16 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import dataJson from './phone.json';
 import Loading from './components/Loading/Loading';
 import Layout from './components/Layout/Layout';
-const ProductList = React.lazy(() => import('./components/ProductList/ProductList'));
-const ProductDetail = React.lazy(() => import('./components/ProductDetail/ProductDetail'));
-const Login = React.lazy(() => import('./components/Login/Login'));
-const Register = React.lazy(() => import('./components/Register/Register'));
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+
+
+const ProductList = React.lazy(() => import('./components/ProductList/ProductList.Container'));
+const ProductDetail = React.lazy(() => import('./components/ProductDetail/ProductDetail.Container'));
+const Login = React.lazy(() => import('./components/Login/Login.Container'));
+const Register = React.lazy(() => import('./components/Register/Register.Container'));
 const NotFound = React.lazy(() => import('./components/NotFound/NotFound'));
 const SideBar = React.lazy(() => import('./components/SideBar/SideBar'));
+const ShoppingCart = React.lazy(() => import('./components/ShoppingCart/ShoppingCart.Container'));
 
 function Main() {
     const [selectedProducts, setSelectedProducts] = useState([]);
@@ -86,11 +90,16 @@ function Main() {
                         </Route>
                         <Route path="/" exact>
                             <Layout>
-                                <ProductList data={productList} onProductClicked={getSelectedProduct} />
+                                <ProductList onProductClicked={getSelectedProduct} />
                                 <SideBar onSortData={onSortClicked} onFilterData={onFilterClicked} onSearchData={onSearchClicked} />
                             </Layout>
                         </Route>
-                        <Route path="/product/:productId"><ProductDetail /></Route>
+                        <PrivateRoute path="/product/:productId">
+                            <ProductDetail />
+                        </PrivateRoute>
+                        <Route path="/shopping-cart">
+                            <ShoppingCart/>
+                        </Route>
                         <Route path="*"><NotFound /></Route>
                     </Switch>
                 </React.Suspense>

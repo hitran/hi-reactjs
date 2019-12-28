@@ -1,13 +1,15 @@
 import React, { useState, useContext } from 'react';
 import {DataContext} from '../DataContext/DataContext';
-import firebase from 'firebase';
+import {useHistory} from 'react-router-dom';
 
 
-export default function Login({ loggedIn }) {
+export default function Login(props) {
   const context = useContext(DataContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  let history = useHistory();
+
 
   const onEmailChange = (e) => {
     setEmail(e.target.value);
@@ -17,22 +19,15 @@ export default function Login({ loggedIn }) {
     setPassword(e.target.value);
   }
 
-  const onLogin = async (e) => {
+  const onLogin = (e) => {
     e.preventDefault();
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
-      window.location.href="/";
-      setErrorMsg('');
-    } catch (error) {
-      setErrorMsg(error.message)
-    }
+    props.loginAction(email, password);
+    history.push('/');
   }
 
   const switchTheme = () => {
     context.switchTheme();
   }
-
-  
   
   return (
     <main style={{backgroundColor: `${context.theme}` }}>
