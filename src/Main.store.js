@@ -4,6 +4,7 @@ import productDetailReducer from './components/ProductDetail/ProductDetail.reduc
 import registerReducer from './components/Register/Register.reducer';
 import loginReducer from './components/Login/Login.reducer';
 import shoppingCartReducer from './components/ShoppingCart/ShoppingCart.reducer';
+import searchReducer from './components/Search/Search.reducer';
 import thunk from 'redux-thunk';
 
 const reducers = combineReducers({ 
@@ -11,7 +12,8 @@ const reducers = combineReducers({
     productDetailReducer, 
     registerReducer, 
     loginReducer,
-    shoppingCartReducer
+    shoppingCartReducer,
+    searchReducer
 });
 
 const logger = store => next => action => {

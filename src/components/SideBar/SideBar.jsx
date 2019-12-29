@@ -1,5 +1,6 @@
 import React from 'react';
-import Search from '../Search/Search';
+import Search from '../Search/Search.Container';
+import Sort from '../Sort/Sort.Container';
 
 function SideBar({ onSortData, onFilterData, onSearchData }) {
     const handleSortClick = (sortType) => {
@@ -26,13 +27,7 @@ function SideBar({ onSortData, onFilterData, onSearchData }) {
                             </div> */}
                 <div className="shop-widget">
                     <h3 className="shop-title">SHOP BY</h3>
-                    <ul className="shop-link">
-                        <li><a onClick={() => handleSortClick('a to z')} href="#">Name: A-Z</a></li>
-                        <li><a onClick={() => handleSortClick('z to a')} href="#">Name: Z-A</a></li>
-                        <li><a onClick={() => handleSortClick('high to low')} href="#">Price: High to Low</a></li>
-                        <li><a onClick={() => handleSortClick('low to high')} href="#">Price: Low to High</a></li>
-                        <li><a onClick={handleFilterClick} href="#">Product: Top Sales</a></li>
-                    </ul>
+                    <Sort/>
                 </div>
                 <div className="shop-widget">
                     <h3 className="shop-title">Recent Product</h3>

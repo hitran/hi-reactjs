@@ -1,4 +1,4 @@
-import dataJson from '../../phone.json'; 
+import axios from 'axios'; 
 export const PRODUCT_DETAIL_REQUEST = "PRODUCT_DETAIL_REQUEST";
 export const PRODUCT_DETAIL_SUCCESS = "PRODUCT_DETAIL_SUCCESS";
 export const PRODUCT_DETAIL_FAIL = "PRODUCT_DETAIL_FAIL";
@@ -24,13 +24,16 @@ function productDetailFailAction(error) {
 }
 
 export function getProductDetailById(id) {
-    return (dispatch) => {
+    return async(dispatch) => {
         dispatch(productDetailRequestAction());
-        const product = dataJson.data.find(elm => parseInt(id) === elm.product_id);
-        if (product) {
-            dispatch(productDetailSuccessAction(product));
-        } else {
-            dispatch(productDetailFailAction("NOT FOUND"));
+        try {
+            const result = await axios({
+                method: "GET",
+                url: `https://mapi.sendo.vn/mob/product/${id}/detail/`
+            })
+            dispatch(productDetailSuccessAction(result.data));
+        } catch (error) {
+            dispatch(productDetailFailAction(error));
         }
     }
 }

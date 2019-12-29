@@ -8,7 +8,6 @@ import Loading from './components/Loading/Loading';
 import Layout from './components/Layout/Layout';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
-
 const ProductList = React.lazy(() => import('./components/ProductList/ProductList.Container'));
 const ProductDetail = React.lazy(() => import('./components/ProductDetail/ProductDetail.Container'));
 const Login = React.lazy(() => import('./components/Login/Login.Container'));
@@ -36,34 +35,6 @@ function Main() {
         setTotalProducts(totalProducts + 1);
     }
 
-    const onSortClicked = (sortType) => {
-        // create a new copy of products and modify it
-        const products = [...dataJson.data];
-        if (sortType === 'z to a') {
-            setProductList(products.sort((a, b) => {
-                if (a.name > b.name) {
-                    return -1;
-                } else if (a.name < b.name) {
-                    return 1;
-                }
-                return 0;
-            }))
-        } else if (sortType === 'a to z') {
-            setProductList(products.sort((a, b) => {
-                if (a.name < b.name) {
-                    return -1;
-                } else if (a.name > b.name) {
-                    return 1;
-                }
-                return 0;
-            }))
-        } else if (sortType === 'low to high') {
-            setProductList(products.sort((a, b) => a.final_price - b.final_price));
-        } else if (sortType === 'high to low') {
-            setProductList(products.sort((a, b) => b.final_price - a.final_price));
-        }
-    }
-
     const onFilterClicked = () => {
         const products = [...productList];
         setProductList(products.filter(product => product.final_promotion_percent >= 10))
@@ -78,7 +49,7 @@ function Main() {
         <>
             <Router>
                 <Header totalItems={totalProducts}>
-                    <Cart selectedProducts={selectedProducts} totalPrice={totalPrice} />
+                    {/* <Cart selectedProducts={selectedProducts} totalPrice={totalPrice} /> */}
                 </Header>
                 <React.Suspense fallback={<Loading />} >
                     <Switch>
@@ -91,7 +62,7 @@ function Main() {
                         <Route path="/" exact>
                             <Layout>
                                 <ProductList onProductClicked={getSelectedProduct} />
-                                <SideBar onSortData={onSortClicked} onFilterData={onFilterClicked} onSearchData={onSearchClicked} />
+                                <SideBar onFilterData={onFilterClicked} onSearchData={onSearchClicked} />
                             </Layout>
                         </Route>
                         <PrivateRoute path="/product/:productId">

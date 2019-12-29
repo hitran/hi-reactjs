@@ -9,13 +9,15 @@ export default function ProductDetail(props) {
     useEffect(() => {
         props.getProductDetailById(id);
     },[])
-    let currentProduct = props.data
+    let currentProduct = props.data;
+    // let img = `https://media3.scdn.vn${currentProduct['images'][0]}`;
+    // console.log(img);
 
     const minus = () => {
-        // if (data.productsInCart) {
-        //     const i = data.productsInCart.findIndex(elm => elm.product_id === currentProduct.product_id);
-        //     if (i > -1 && data.productsInCart[i]['qty'] > 0) {
-        //         data.productsInCart[i]['qty'] -= 1;
+        // if (props.productsInCart) {
+        //     const i = props.productsInCart.findIndex(elm => elm.product_id === currentProduct.product_id);
+        //     if (i > -1 && props.productsInCart[i]['qty'] > 0) {
+        //         props.productsInCart[i]['qty'] -= 1;
         //     }
         //     props.addToCartAction(data);
         // }
@@ -26,10 +28,10 @@ export default function ProductDetail(props) {
         // }
     }
     const plus = () => {
-        // if (data.productsInCart) {
-        //     const i = data.productsInCart.findIndex(elm => elm.product_id === currentProduct.product_id);
+        // if (props.productsInCart) {
+        //     const i = props.productsInCart.findIndex(elm => elm.product_id === currentProduct.product_id);
         //     if (i > -1) {
-        //         data.productsInCart[i]['qty'] += 1;
+        //         props.productsInCart[i]['qty'] += 1;
         //     }
         //     props.addToCartAction(data);
         // }
@@ -40,14 +42,13 @@ export default function ProductDetail(props) {
     const onPurchase = (e) => {
         // e.preventDefault();
         // currentProduct['qty'] = qty;
-        // if (!data.productsInCart) {
-        //     data.productsInCart = [currentProduct];
+        // if (!props.productsInCart) {
+        //     props.productsInCart = [currentProduct];
         // } else {
-        //     data.productsInCart = [...data.productsInCart, currentProduct];
+        //     props.productsInCart = [...data.productsInCart, currentProduct];
         // }
         // props.addToCartAction(data);
-        //history.push("/shopping-cart");
-
+        // history.push("/shopping-cart");
     }
     if (props.error || !currentProduct) {
         return <NotFound/>
@@ -63,17 +64,17 @@ export default function ProductDetail(props) {
                                 <div className="tab-content" id="myTabContentpro">
                                     <div className="tab-pane fade show active" id="home" role="tabpanel">
                                         <div className="product-large-img">
-                                            <img src={currentProduct.img_url} alt="" />
+                                        <img src={`https://media3.scdn.vn${currentProduct['images'][0]}`} alt="" />
                                         </div>
                                     </div>
                                     <div className="tab-pane fade" id="profile" role="tabpanel">
                                         <div className="product-large-img">
-                                            <img src={currentProduct.img_url} alt="" />
+                                        <img src={`https://media3.scdn.vn${currentProduct['images'][1]}`} alt="" />
                                         </div>
                                     </div>
                                     <div className="tab-pane fade" id="profile1" role="tabpanel">
                                         <div className="product-large-img">
-                                            <img src={currentProduct.img_url} alt="" />
+                                            <img src={`https://media3.scdn.vn${currentProduct['images'][2]}`} alt="" />
                                         </div>
                                     </div>
                                 </div>
@@ -100,8 +101,8 @@ export default function ProductDetail(props) {
                                 </div>
                                 <h2 className="pro-details-title mb-15">{currentProduct.name}</h2>
                                 <div className="details-price mb-20">
-                                    <span>{currentProduct.final_price.toLocaleString()}</span>
-                                    <span className="old-price">{currentProduct.price.toLocaleString()}</span>
+                                    <span>{currentProduct.final_price}</span>
+                                    <span className="old-price">{currentProduct.price}</span>
                                 </div>
                                 <div className="product-variant">
                                     <div className="product-desc variant-item">
