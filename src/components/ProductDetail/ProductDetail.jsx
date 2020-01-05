@@ -1,54 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import NotFound from '../NotFound/NotFound';
 
 export default function ProductDetail(props) {
     const [qty, setQty] = useState(1);
+    const [currentTab, setCurrentTab] = useState(0);
     const param = useParams();
     const id = parseInt(param.productId);
+    const history = useHistory();
     useEffect(() => {
         props.getProductDetailById(id);
     },[])
     let currentProduct = props.data;
-    // let img = `https://media3.scdn.vn${currentProduct['images'][0]}`;
-    // console.log(img);
 
     const minus = () => {
-        // if (props.productsInCart) {
-        //     const i = props.productsInCart.findIndex(elm => elm.product_id === currentProduct.product_id);
-        //     if (i > -1 && props.productsInCart[i]['qty'] > 0) {
-        //         props.productsInCart[i]['qty'] -= 1;
-        //     }
-        //     props.addToCartAction(data);
-        // }
-        // // for display only
-        // if (qty > 0 ) {
-        //     const newQty = qty - 1
-        //     setQty(newQty);
-        // }
+        if (props.productsInCart) {
+            let data = [...props.productsInCart];
+            const i = data.findIndex(elm => elm.product_id === currentProduct.product_id);
+            if (i > -1 && data[i]['qty'] > 0) {
+                data[i]['qty'] -= 1;
+            }
+            props.addToCartAction(data);
+        }
+        // for display only
+        if (qty > 0) {
+            const newQty = qty - 1
+            setQty(newQty);
+        }
     }
     const plus = () => {
-        // if (props.productsInCart) {
-        //     const i = props.productsInCart.findIndex(elm => elm.product_id === currentProduct.product_id);
-        //     if (i > -1) {
-        //         props.productsInCart[i]['qty'] += 1;
-        //     }
-        //     props.addToCartAction(data);
-        // }
-        // // for display only
-        // const newQty = qty + 1
-        // setQty(newQty);
+        if (props.productsInCart) {
+            let data = [...props.productsInCart];
+            const i = data.findIndex(elm => elm.product_id === currentProduct.product_id);
+            if (i > -1) {
+                data[i]['qty'] += 1;
+            }
+            props.addToCartAction(data);
+        }
+        // for display only
+        const newQty = qty + 1
+        setQty(newQty);
     }
     const onPurchase = (e) => {
-        // e.preventDefault();
-        // currentProduct['qty'] = qty;
-        // if (!props.productsInCart) {
-        //     props.productsInCart = [currentProduct];
-        // } else {
-        //     props.productsInCart = [...data.productsInCart, currentProduct];
-        // }
-        // props.addToCartAction(data);
-        // history.push("/shopping-cart");
+        e.preventDefault();
+        currentProduct['qty'] = qty;
+        props.addToCartAction([...props.productsInCart, props.data]);
+        history.push("/shopping-cart");
+    }
+    const toggleCurrentTab = (id) => {
+        setCurrentTab(id)
     }
     if (props.error || !currentProduct) {
         return <NotFound/>
@@ -101,8 +101,8 @@ export default function ProductDetail(props) {
                                 </div>
                                 <h2 className="pro-details-title mb-15">{currentProduct.name}</h2>
                                 <div className="details-price mb-20">
-                                    <span>{currentProduct.final_price}</span>
-                                    <span className="old-price">{currentProduct.price}</span>
+                                    <span>{currentProduct.final_price.toLocaleString()}đ</span>
+                                    <span className="old-price">{currentProduct.price.toLocaleString()}đ</span>
                                 </div>
                                 <div className="product-variant">
                                     <div className="product-desc variant-item">
@@ -143,14 +143,14 @@ export default function ProductDetail(props) {
                             <div className="product-review">
                                 <ul className="nav review-tab" id="myTabproduct" role="tablist">
                                     <li className="nav-item">
-                                        <a className="nav-link active" id="home-tab6" data-toggle="tab" href="#home6" role="tab" aria-controls="home" aria-selected="true">Description </a>
+                                        <a className={`nav-link ${currentTab === 0 ? 'active' : ''}`} onClick={() => toggleCurrentTab(0)} id="home-tab6" data-toggle="tab" role="tab" aria-controls="home" aria-selected={currentTab === 0}>Description </a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" id="profile-tab6" data-toggle="tab" href="#profile6" role="tab" aria-controls="profile" aria-selected="false">Reviews (2)</a>
+                                        <a className={`nav-link ${currentTab === 1 ? 'active' : ''}`} onClick={() => toggleCurrentTab(1)} id="profile-tab6" data-toggle="tab"  role="tab" aria-controls="profile" aria-selected={currentTab === 1}>Reviews (2)</a>
                                     </li>
                                 </ul>
                                 <div className="tab-content" id="myTabContent2">
-                                    <div className="tab-pane fade show active" id="home6" role="tabpanel" aria-labelledby="home-tab6">
+                                    <div className={`tab-pane fade ${currentTab === 0 ? 'active show' : ''}`} id="home6" role="tabpanel" aria-labelledby="home-tab6">
                                         <div className="desc-text">
                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
                                               aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -163,7 +163,7 @@ export default function ProductDetail(props) {
                           adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
                                         </div>
                                     </div>
-                                    <div className="tab-pane fade" id="profile6" role="tabpanel" aria-labelledby="profile-tab6">
+                                    <div className={`tab-pane fade ${currentTab === 1 ? 'active show' : ''}`} id="profile6" role="tabpanel" aria-labelledby="profile-tab6">
                                         <div className="desc-text review-text">
                                             <div className="product-commnets">
                                                 <div className="product-commnets-list mb-25 pb-15">

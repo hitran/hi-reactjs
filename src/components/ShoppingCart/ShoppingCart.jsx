@@ -1,29 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 
 export default function ShoppingCart(props) {
-    const data = { ...props.data };
-    // let productsInCart = [data.productsInCart];
-    const product = {};
-    useEffect(() => {
-        // if (productsInCart.length > 0) {
-        //     // product = productsInCart.map(elm =>
-        //     //     (<tr>
-        //     //         <td className="product-thumbnail"><a href="#"><img src={elm.img_url} alt="" /></a></td>
-        //     //         <td className="product-name"><a href="#">{elm.name}</a></td>
-        //     //     <td className="product-price"><span className="amount">{elm.final_price.toLocaleString()} VND</span></td>
-        //     //         <td className="product-quantity">
-        //     //             <div className="cart-plus-minus"><input type="text" defaultValue={elm.qty} /><div className="dec qtybutton">-</div><div className="inc qtybutton">+</div></div>
-        //     //         </td>
-        //     //         <td className="product-subtotal"><span className="amount">$130.00</span></td>
-        //     //         <td className="product-remove"><a href="#"><i className="fa fa-times" /></a></td>
-        //     //     </tr>)
-        //     // )
-        //     console.log(productsInCart);
-        // }
-    })
-
-
+    const products = props.data.map(elm =>
+        (<tr>
+            <td className="product-thumbnail"><a href="#"><img src={`https://media3.scdn.vn${elm['images'][0]}`}  alt="" /></a></td>
+            <td className="product-name"><a href="#">{elm.name}</a></td>
+        <td className="product-price"><span className="amount">{elm.final_price.toLocaleString()} VND</span></td>
+            <td className="product-quantity">
+                <div className="cart-plus-minus"><input type="text" defaultValue={elm.qty} /><div className="dec qtybutton">-</div><div className="inc qtybutton">+</div></div>
+            </td>
+            <td className="product-subtotal"><span className="amount">$130.00</span></td>
+            <td className="product-remove"><a href="#"><i className="fa fa-times" /></a></td>
+        </tr>));
     return (
         <>
             <section className="breadcrumb-area" style={{ backgroundImage: 'url("./assets/page-title.png")' }}>
@@ -32,10 +21,6 @@ export default function ShoppingCart(props) {
                         <div className="col-xl-12">
                             <div className="breadcrumb-text text-center">
                                 <h1>Shoping Cart</h1>
-                                <ul className="breadcrumb-menu">
-                                    <li><a href="index.html">home</a></li>
-                                    <li><span>Cart</span></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -59,7 +44,8 @@ export default function ShoppingCart(props) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {product}
+                                            {products}
+                                            {/* bla bla bla */}
                                         </tbody>
                                     </table>
                                 </div>

@@ -9,10 +9,10 @@ function shoppingCartRequestAction() {
     }
 }
 
-function shoppingCartSuccessAction(payload) {
+function shoppingCartSuccessAction(data) {
     return {
         type: SHOPPING_CART_SUCCESS,
-        payload: payload
+        payload: data
     }
 }
 
@@ -35,6 +35,7 @@ export function shoppingCartAction() {
 
 export function addToCartAction(products) {
     return (dispatch) => {
+        console.log('add to cart', products)
         dispatch(shoppingCartSuccessAction(products));
     }
 }

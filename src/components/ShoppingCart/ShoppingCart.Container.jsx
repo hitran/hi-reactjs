@@ -4,7 +4,7 @@ import {addToCartAction} from './ShoppingCart.action';
 
 const mapStateToProps = (store) => ({
     load: store.shoppingCartReducer.load,
-    data: store.shoppingCartReducer.result,
+    data: store.shoppingCartReducer.data,
     error: store.shoppingCartReducer.fail
 })
 

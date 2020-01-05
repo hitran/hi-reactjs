@@ -6,7 +6,7 @@ import {getProductDetailById} from './ProductDetail.action';
 const mapStateToProps = (store) => ({
     load: store.productDetailReducer.load,
     data: store.productDetailReducer.result,
-    productsInCart: store.shoppingCartReducer.result,
+    productsInCart: store.shoppingCartReducer.data,
     error: store.productDetailReducer.fail
 })
 

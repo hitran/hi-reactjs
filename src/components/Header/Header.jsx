@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 import firebase from 'firebase'
 
 function Header(props) {
@@ -45,22 +46,22 @@ function Header(props) {
                                 <nav id="mobile-menu" style={{ display: "block" }}>
                                     <ul>
                                         <li>
-                                            <a href="./index.html">Home</a>
+                                            <Link to="/">Home</Link>
                                         </li>
                                         <li>
                                             <a href="#">Pages</a>
                                             <ul className="submenu">
-                                                <li>
+                                                {/* <li>
                                                     <a href="./detail.html">Product Detail</a>
+                                                </li> */}
+                                                <li>
+                                                    <Link to="/login">Login</Link>
                                                 </li>
                                                 <li>
-                                                    <a href="./login.html">login</a>
+                                                    <Link to="/register">Register</Link>
                                                 </li>
                                                 <li>
-                                                    <a href="./register.html">Register</a>
-                                                </li>
-                                                <li>
-                                                    <a href="./cart.html">Shoping Cart</a>
+                                                    <Link to="/shopping-cart">Shoping Cart</Link>
                                                 </li>
                                             </ul>
                                         </li>

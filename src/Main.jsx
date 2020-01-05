@@ -3,7 +3,6 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Cart from './components/Cart/Cart';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import dataJson from './phone.json';
 import Loading from './components/Loading/Loading';
 import Layout from './components/Layout/Layout';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
@@ -20,7 +19,6 @@ function Main() {
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalProducts, setTotalProducts] = useState(0);
-    const [productList, setProductList] = useState(dataJson.data);
 
     const getSelectedProduct = (product) => {
         const i = selectedProducts.findIndex(elm => elm.product_id === product.product_id);
@@ -35,15 +33,10 @@ function Main() {
         setTotalProducts(totalProducts + 1);
     }
 
-    const onFilterClicked = () => {
-        const products = [...productList];
-        setProductList(products.filter(product => product.final_promotion_percent >= 10))
-    }
-
-    const onSearchClicked = (searchQuery) => {
-        const products = [...dataJson.data];
-        setProductList(products.filter(product => product.name.includes(searchQuery)));
-    }
+    // const onFilterClicked = () => {
+    //     const products = [...productList];
+    //     setProductList(products.filter(product => product.final_promotion_percent >= 10))
+    // }
 
     return (
         <>
@@ -62,7 +55,7 @@ function Main() {
                         <Route path="/" exact>
                             <Layout>
                                 <ProductList onProductClicked={getSelectedProduct} />
-                                <SideBar onFilterData={onFilterClicked} onSearchData={onSearchClicked} />
+                                <SideBar/>
                             </Layout>
                         </Route>
                         <PrivateRoute path="/product/:productId">

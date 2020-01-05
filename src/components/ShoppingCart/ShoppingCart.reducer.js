@@ -2,11 +2,11 @@ import {SHOPPING_CART_REQUEST, SHOPPING_CART_SUCCESS, SHOPPING_CART_FAIL} from '
 
 const initialState = {
     load: false,
-    data: null,
+    data: [],
     fail: null
 }
 export default function shoppingCartReducer(state = initialState, action) {
-    switch(action) {
+    switch(action.type) {
         case SHOPPING_CART_REQUEST:
             return {
                 ...state,
