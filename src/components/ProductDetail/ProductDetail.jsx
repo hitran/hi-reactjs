@@ -10,7 +10,7 @@ export default function ProductDetail(props) {
     const history = useHistory();
     useEffect(() => {
         props.getProductDetailById(id);
-    },[])
+    },[id])
     let currentProduct = props.data;
 
     const minus = () => {

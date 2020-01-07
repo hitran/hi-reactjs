@@ -4,7 +4,7 @@ import Clock from '../Clock/Clock';
 function Footer() {
     return (
         <footer className="footer-area pl-100 pr-100">
-            <div className="footer-area box-90 pt-100 pb-60" data-background="img/bg/footer.jpg" style={{ "background-image": "url(&quot;img/bg/footer.jpg&quot)" }}>
+            <div className="footer-area box-90 pt-100 pb-60" data-background="img/bg/footer.jpg" style={{backgroundImage: "url(&quot;img/bg/footer.jpg&quot)" }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-xl-5 col-lg-6 col-md-6 ">
@@ -12,7 +12,7 @@ function Footer() {
                                 <div className="footer-logo">
                                     <a href="#"><img src="./assets/logo_shop.png" alt="" /></a>
                                 </div>
-                                <Clock/>
+                                {/* <Clock/> */}
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
                                     ut labore et dolore mag na
                                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip

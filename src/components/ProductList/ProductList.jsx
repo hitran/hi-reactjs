@@ -11,7 +11,8 @@ function ProductList(props) {
             <div className="row mb-10">
                 <div className="col-xl-5 col-lg-6 col-md-6">
                     <div className="product-showing mb-40">
-                        <p>Showing 1–22 of 32 results</p>
+                        <p>Trending:</p>
+                        <span>Bitis Hunter</span>
                     </div>
                 </div>
             </div>
@@ -21,16 +22,7 @@ function ProductList(props) {
                     <div className="row">
                         {props.data ?
                             props.data.map(elm => {
-                                return <ProductItem
-                                    key={elm.product_id}
-                                    onProductClicked={props.onProductClicked}
-                                    // img_url={elm.img_url} 
-                                    // shop_name={elm.shop_name} 
-                                    // name={elm.name} 
-                                    // final_price={elm.final_price}
-                                    // price={elm.price}
-                                    {...elm}
-                                />
+                                return<ProductItem key={elm.product_id} {...elm}/>
                             }): null
                         }
                     </div>

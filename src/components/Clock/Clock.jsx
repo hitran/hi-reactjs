@@ -83,9 +83,9 @@ export default function Clock () {
         }
     };
 
-    useEffect(() => {
-        setInterval(getTime, 1000);
-    }, [time])
+    // useEffect(() => {
+    //     setInterval(getTime, 1000);
+    // }, [time])
 
     return (<h3>{time}</h3>);
 }
